@@ -1,7 +1,9 @@
 #include<xc.h>           // processor SFR definitions
 #include<sys/attribs.h>  // __ISR macro
 #include<stdio.h>
-#include "ws2812b.h"
+#include "ST7789.h"
+#include "font.h"
+
 // DEVCFG0
 #pragma config DEBUG = OFF // disable debugging
 #pragma config JTAGEN = OFF // disable jtag
@@ -52,54 +54,23 @@ int main() {
     // disable JTAG to get pins back
     DDPCONbits.JTAGEN = 0;
     
-    ws2812b_setup();
     TRISAbits.TRISA4=0;
     LATAbits.LATA4=0;
     
-    int i = 0;
-     int j=90;
-     int k=180;
-     int l=270;
+    void initSPI();
+    void LCD_init();
+    
     
     while (1){
-       
-
-    int numLEDs = 4;
-        wsColor c[numLEDs];
-        c[0]=HSBtoRGB(i,1,1);
-        c[1]=HSBtoRGB(j,1,1);
-        c[2]=HSBtoRGB(k,1,1);
-        c[3]=HSBtoRGB(l,1,1);
-        i++;
-        j++;
-        k++;
-        l++;
-               
-        if (i-360>0){
-            i=0;
-        }
-        if(j-360>0){
-            j=0;
-        }
-        if(k-360>0){
-            k=0;
-        }
-        if(l-360>0){
-            l=0;
-        }
-ws2812b_setColor(c, numLEDs);
-
-LATAINV=0b10000;
+    
+        LATAINV=0b10000;
         delay(); //blink 
-          
         
-        
-            }           
-       
+            }            
 }
 
 void delay(void){
-    float time = 0.05;
+    float time = 0.005;
     float clocks= time/(1.0/24000000.0);
    
  _CP0_SET_COUNT(0); //sets core timer to 0 once we push button
@@ -107,10 +78,3 @@ void delay(void){
         ;
     }
 }
-
-
-
-
-
-
-

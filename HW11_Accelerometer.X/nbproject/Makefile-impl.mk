@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=HW7
+PROJECTNAME=HW11_Accelerometer.X
 
 # Active Configuration
 DEFAULTCONF=default
