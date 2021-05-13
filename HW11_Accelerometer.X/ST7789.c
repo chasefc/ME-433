@@ -156,4 +156,60 @@ void drawProgressBar(unsigned short x, unsigned short y, int length, int value, 
         }
     }
 }
+void drawProgressBarPosX(unsigned short x, unsigned short y, int length, int value, unsigned short forecolor, unsigned short backcolor){
+    int i;
+    int j;
+    for (i = 0; i<length; i++){
+        for (j = 0; j<8; j++){
+            if (i<value){
+                LCD_drawPixel(x+i, y+j, forecolor);
+            }
+            else{
+                LCD_drawPixel(x+i, y+j, backcolor);
+            }
+        }
+    }
+}
 
+void drawProgressBarNegX(unsigned short x, unsigned short y, int length, int value, unsigned short forecolor, unsigned short backcolor){
+    int i;
+    int j;
+    for (i = 0; i<length; i++){
+        for (j = 0; j<8; j++){
+            if (i<value){
+                LCD_drawPixel(x-i, y+j, forecolor);
+            }
+            else{
+                LCD_drawPixel(x-i, y+j, backcolor);
+            }
+        }
+    }
+}
+void drawProgressBarPosY(unsigned short x, unsigned short y, int length, int value, unsigned short forecolor, unsigned short backcolor){
+    int i;
+    int j;
+    for (i = 0; i<length; i++){
+        for (j = 0; j<8; j++){
+            if (i<value){
+                LCD_drawPixel(x+j, y+i, forecolor);
+            }
+            else{
+                LCD_drawPixel(x+j, y+i, backcolor);
+            }
+        }
+    }
+}
+void drawProgressBarNegY(unsigned short x, unsigned short y, int length, int value, unsigned short forecolor, unsigned short backcolor){
+    int i;
+    int j;
+    for (i = 0; i<length; i++){
+        for (j = 0; j<8; j++){
+            if (i<value){
+                LCD_drawPixel(x+j, y-i, forecolor);
+            }
+            else{
+                LCD_drawPixel(x+j, y-i, backcolor);
+            }
+        }
+    }
+}

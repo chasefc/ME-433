@@ -38,6 +38,7 @@
 
 void delay(void);
 
+
 int main() {
 
     __builtin_disable_interrupts(); // disable interrupts while initializing things
@@ -56,15 +57,34 @@ int main() {
     
     TRISAbits.TRISA4=0;
     LATAbits.LATA4=0;
-    
-    void initSPI();
-    void LCD_init();
-    
+    initSPI();
+    LCD_init();
+    LCD_clearScreen(WHITE);
+    char m[50];
     
     while (1){
-    
-        LATAINV=0b10000;
-        delay(); //blink 
+        int num=0;
+        int i;
+        for(i=0; i<101;i++){
+            sprintf(m,"HELLO WORLD %d!       ", num);
+            _CP0_SET_COUNT(0);
+            drawString(100,50, m, BLACK,WHITE);
+            int ticks= _CP0_GET_COUNT();
+            
+            drawProgressBar(100,64,101,i,BLUE,MAGENTA);
+            
+            float freq=1/(ticks/24000000.0);
+            sprintf(m,"FPS: %.2f", freq);
+            drawString(100,75,m,BLACK,WHITE);
+            num++;
+                     
+                       
+        }
+                 
+                    
+        
+    LATAINV=0b10000;
+    delay(); //blink 
         
             }            
 }
